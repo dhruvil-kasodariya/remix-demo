@@ -50,29 +50,34 @@ export default function Book() {
     };
 
     return (
-        <div className="books">
-            <h1>Books</h1>
-            <CreateBookForm />
-            <ul className="books-list">
-                {books.map((book: Book) => (
-                    <li key={book.id} className="book-item">
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-author">by {book.author}</div>
-                        <div className="book-buttons">
-                            <Form method="delete" action={`/books?id=${book.id}`}>
-                                <button type="submit">Delete</button>
-                            </Form>
-                            <button onClick={() => handleUpdateClick(book)}>Update</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-            {showUpdateForm && selectedBook && (
-                <UpdateBookForm
-                    book={selectedBook}
-                    onClose={() => setShowUpdateForm(false)}
-                />
-            )}
+        <div className="w-full h-screen flex flex-col items-center justify-center">
+            <h1 className="text-2xl font-extrabold">Books</h1>
+            <div className="h-fit flex justify-center items-center flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+
+                <CreateBookForm />
+            </div>
+            <div>
+                <ul className="books-list">
+                    {books.map((book: Book) => (
+                        <li key={book.id} className="book-item">
+                            <div className="book-title">{book.title}</div>
+                            <div className="book-author">by {book.author}</div>
+                            <div className="book-buttons">
+                                <Form method="delete" action={`/books?id=${book.id}`}>
+                                    <button type="submit">Delete</button>
+                                </Form>
+                                <button onClick={() => handleUpdateClick(book)}>Update</button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+                {showUpdateForm && selectedBook && (
+                    <UpdateBookForm
+                        book={selectedBook}
+                        onClose={() => setShowUpdateForm(false)}
+                    />
+                )}
+            </div>
         </div>
     );
 }
