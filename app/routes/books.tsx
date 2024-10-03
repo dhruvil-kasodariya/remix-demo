@@ -4,6 +4,7 @@ import { getBooks, deleteBook, createBook, updateBook } from "../../utils/books"
 import CreateBookForm from "~/components/createForm";
 import UpdateBookForm from "~/components/updateForm";
 import { useState } from "react";
+import Navbar from "~/components/navbar";
 
 type Book = {
     id: string;
@@ -50,8 +51,9 @@ export default function Book() {
     };
 
     return (
-        <div className="w-full h-screen flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-extrabold">Books</h1>
+        <div className="w-full h-screen">
+        <Navbar/>
+        <div className="w-full h-full  flex flex-col items-center justify-center">
             <div className="h-fit flex justify-center items-center flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
 
                 <CreateBookForm />
@@ -73,11 +75,12 @@ export default function Book() {
                 </ul>
                 {showUpdateForm && selectedBook && (
                     <UpdateBookForm
-                        book={selectedBook}
+                    book={selectedBook}
                         onClose={() => setShowUpdateForm(false)}
                     />
                 )}
             </div>
         </div>
+                </div>
     );
 }

@@ -3,9 +3,9 @@ import { Form } from "@remix-run/react";
 export default function CreateBookForm() {
     return (
         <div className="divide-y max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Add New Book</h2>
+            <h2 className="text-2xl font-bold mb-3 text-gray-800 dark:text-white">Add New Book</h2>
             <Form method="post" className="space-y-4">
-                <div className="space-y-2">
+                <div className="space-y-2 mt-2">
                     <label
                         htmlFor="title"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-200"
