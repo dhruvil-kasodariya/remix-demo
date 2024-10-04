@@ -1,9 +1,9 @@
 // app/components/Navbar.tsx
 
+import { redirect } from '@remix-run/react';
 import React, { useEffect, useState } from 'react';
 
-import { GiMoonBats } from "react-icons/gi";
-import { GiBarbedSun } from "react-icons/gi";
+import { GiMoonBats, GiBarbedSun } from "react-icons/gi";
 
 const Navbar: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -36,11 +36,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="flex items-center justify-between py-4 px-8 bg-gray-800 text-white dark:bg-gray-900">
       {/* Left side: Logo */}
-      <div className="flex items-center">
-        {/* <Link to="/" className="text-xl font-bold"> */}
-          YourLogo
-        {/* </Link> */}
-      </div>
+      <button className="flex items-center text-xl font-bold" onClick={() => redirect("/books")}>
+        BOOKS
+      </button>
 
       {/* Right side: Theme toggle button */}
       <div className="flex items-center">

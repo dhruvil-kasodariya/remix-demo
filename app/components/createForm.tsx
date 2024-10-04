@@ -1,10 +1,22 @@
-import { Form } from "@remix-run/react";
+import { Form, useNavigation } from "@remix-run/react";
+import { useEffect, useRef } from "react";
 
 export default function CreateBookForm() {
+    const formRef = useRef<HTMLFormElement>(null);
+    const navigation = useNavigation();
+    const isSubmitting = navigation.state === "submitting";
+
+    // Reset form when submission is complete
+    useEffect(() => {
+        if (!isSubmitting && formRef.current) {
+            formRef.current.reset();
+        }
+    }, [isSubmitting]);
+
     return (
         <div className="divide-y max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-3 text-gray-800 dark:text-white">Add New Book</h2>
-            <Form method="post" className="space-y-4">
+            <Form ref={formRef} method="post" className="space-y-4">
                 <div className="space-y-2 mt-2">
                     <label
                         htmlFor="title"
@@ -47,13 +59,16 @@ export default function CreateBookForm() {
 
                 <button
                     type="submit"
-                    className="w-full px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 
-                             dark:bg-blue-600 dark:hover:bg-blue-700
-                             rounded-md transition-colors duration-200
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-2 text-white rounded-md transition-colors duration-200
                              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                             dark:focus:ring-offset-gray-800"
+                             dark:focus:ring-offset-gray-800
+                             ${isSubmitting
+                            ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed'
+                            : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700'
+                        }`}
                 >
-                    Create Book
+                    {isSubmitting ? 'Creating...' : 'Create Book'}
                 </button>
             </Form>
         </div>
