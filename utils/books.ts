@@ -1,21 +1,20 @@
-import { PrismaClient, Book } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { Book } from "@prisma/client";
+import { db } from "./db.server";
 
 type CreateBookInput = Omit<Book, "id">;
 
 export async function getBooks(): Promise<Book[]> {
-  return prisma.book.findMany();
+  return db.book.findMany();
 }
 
 export async function getBookById(id: string): Promise<Book | null> {
-  return prisma.book.findUnique({
+  return db.book.findUnique({
     where: { id: parseInt(id) },
   });
 }
 
 export async function createBook(book: CreateBookInput): Promise<Book> {
-  return prisma.book.create({
+  return db.book.create({
     data: book,
   });
 }
@@ -24,14 +23,14 @@ export async function updateBook(
   id: string,
   book: Partial<CreateBookInput>
 ): Promise<Book> {
-  return prisma.book.update({
+  return db.book.update({
     where: { id: parseInt(id) },
     data: book,
   });
 }
 
 export async function deleteBook(id: string): Promise<Book> {
-  return prisma.book.delete({
+  return db.book.delete({
     where: { id: parseInt(id) },
   });
 }
