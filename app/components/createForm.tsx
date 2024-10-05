@@ -6,7 +6,6 @@ export default function CreateBookForm() {
     const navigation = useNavigation();
     const isSubmitting = navigation.state === "submitting";
 
-    // Reset form when submission is complete
     useEffect(() => {
         if (!isSubmitting && formRef.current) {
             formRef.current.reset();
