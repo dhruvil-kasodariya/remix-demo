@@ -1,6 +1,6 @@
 import { Form, json, redirect, useLoaderData } from "@remix-run/react";
 import { ActionFunctionArgs, LoaderFunction } from "@remix-run/node";
-import { getBooks, deleteBook, createBook, updateBook } from "../../utils/books";
+import { getBooks, deleteBook, createBook, updateBook } from "../utils/books";
 import CreateBookForm from "~/components/createForm";
 import UpdateBookForm from "~/components/updateForm";
 import { useState } from "react";
